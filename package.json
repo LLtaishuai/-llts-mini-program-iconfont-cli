@@ -24,9 +24,9 @@
     "release": "release-it"
   },
   "bin": {
-    "iconfont": "./commands/help.js",
-    "iconfont-create": "./commands/createWechatIcon.js",
-    "iconfont-init": "./commands/createJson.js"
+    "iconfont": "./build/commands/help.js",
+    "iconfont-create": "./build/commands/createWechatIcon.js",
+    "iconfont-init": "./build/commands/createJson.js"
   },
   "repository": {
     "type": "git",
