@@ -14,7 +14,7 @@ import {
 } from './replace';
 
 
-export const generateKuaishouComponent = (data: XmlData, config: Config) => {
+export const generateKuaishouComponent = (xmlDataList: Array<{result:XmlData, prefix: string}>, config: Config) => {
   const names: string[] = [];
   const svgTemplates: string[] = [];
 
@@ -23,26 +23,28 @@ export const generateKuaishouComponent = (data: XmlData, config: Config) => {
 
   mkdirp.sync(saveDir);
   glob.sync(path.join(saveDir, '*')).forEach((file) => fs.unlinkSync(file));
-
-  data.svg.symbol.forEach((item) => {
-    const iconId = item.$.id;
-    const iconIdAfterTrim = config.trim_icon_prefix
-      ? iconId.replace(
-        new RegExp(`^${config.trim_icon_prefix}(.+?)$`),
-        (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1')
-      )
-      : iconId;
-
-    names.push(iconIdAfterTrim);
-    svgTemplates.push(
-      `<!--${iconIdAfterTrim}-->\n<view ks:if="{{name === '${iconIdAfterTrim}'}}" style="background-image: url({{quot}}data:image/svg+xml, ${generateCase(item, {
-        hexToRgb: true
-      })}{{quot}});` +
-      ' width: {{svgSize}}px; height: {{svgSize}}px;" class="icon" />'
-    );
-
-    console.log(`${colors.green('√')} Generated icon "${colors.yellow(iconId)}"`);
+  xmlDataList.map((xmlData) => {
+    xmlData.result.svg.symbol.forEach((item) => {
+      const iconId = item.$.id;
+      const iconIdAfterTrim = xmlData.prefix
+        ? iconId.replace(
+          new RegExp(`^${xmlData.prefix}(.+?)$`),
+          (_, value) => value.replace(/^[-_.=+#@!~*]+(.+?)$/, '$1')
+        )
+        : iconId;
+  
+      names.push(iconIdAfterTrim);
+      svgTemplates.push(
+        `<!--${iconIdAfterTrim}-->\n<view ks:if="{{name === '${iconIdAfterTrim}'}}" style="background-image: url({{quot}}data:image/svg+xml, ${generateCase(item, {
+          hexToRgb: true
+        })}{{quot}});` +
+        ' width: {{svgSize}}px; height: {{svgSize}}px;" class="icon" />'
+      );
+  
+      console.log(`${colors.green('√')} Generated icon "${colors.yellow(iconId)}"`);
+    });
   });
+  
 
   fs.writeFileSync(path.join(saveDir, fileName + '.ksml'), svgTemplates.join('\n\n'));
   fs.writeFileSync(path.join(saveDir, fileName + '.css'), getTemplate('kuaishou.css'));

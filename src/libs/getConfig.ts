@@ -4,11 +4,15 @@ import colors from 'colors';
 import defaultConfig from './iconfont.json';
 import minimist from 'minimist';
 
+export interface IOption {
+  url: string,
+  trim_icon_prefix: string;
+}
+
 export interface Config {
-  symbol_url: string;
+  symbol_options: IOption[];
   save_dir: string;
   use_rpx: boolean;
-  trim_icon_prefix: string;
   default_icon_size: number;
 }
 
@@ -36,15 +40,11 @@ export const getConfig = () => {
 
   const config = require(targetFile) as Config;
 
-  if (!config.symbol_url || !/^(https?:)?\/\//.test(config.symbol_url)) {
+  if (!Array.isArray(config.symbol_options) || !config.symbol_options.length || config.symbol_options.some(option => !/^(https?:)?\/\//.test(option.url))) {
     console.warn(colors.red('You are required to provide symbol_url'));
     process.exit(1);
   }
-
-  if (config.symbol_url.indexOf('//') === 0) {
-    config.symbol_url = 'http:' + config.symbol_url;
-  }
-
+  config.symbol_options = config.symbol_options.map(option => option.url.indexOf('//') === 0 ? {...option, url: `http:${option.url}`} : option)
   config.save_dir = config.save_dir || defaultConfig.save_dir;
   config.default_icon_size = config.default_icon_size || defaultConfig.default_icon_size;
 

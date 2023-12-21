@@ -19,7 +19,7 @@ export interface XmlData {
   }
 }
 
-export const fetchXml = async (url): Promise<XmlData> => {
+export const fetchXml = async (url, prefix: string): Promise<{result:XmlData, prefix: string}> => {
   console.log('Fetching iconfont data...');
 
   try {
@@ -27,19 +27,19 @@ export const fetchXml = async (url): Promise<XmlData> => {
     const matches = String(data).match(/'<svg>(.+?)<\/svg>'/);
 
     if (matches) {
-      return new Promise<XmlData>((resolve, reject) => {
+      return new Promise<{result:XmlData, prefix: string}>((resolve, reject) => {
         parseString(`<svg>${matches[1]}</svg>`, { rootName: 'svg' },  (err: Error, result: XmlData) => {
           if (err) {
             reject(err);
           } else {
-            resolve(result);
+            resolve({result, prefix});
           }
         });
       });
     }
 
     throw new Error('You provide a wrong symbol url');
-  } catch (e) {
+  } catch (e: any) {
     console.error(colors.red(e.message || 'Unknown Error'));
     process.exit(1);
     throw e;
