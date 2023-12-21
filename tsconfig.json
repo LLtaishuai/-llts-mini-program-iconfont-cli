@@ -6,7 +6,7 @@
     "declaration": true,
     "removeComments": false,
     "outDir": "./build",
-    "rootDir": "./",
+    "rootDir": "./src",
     "jsx": "react",
     "importHelpers": true,
     "downlevelIteration": true,
