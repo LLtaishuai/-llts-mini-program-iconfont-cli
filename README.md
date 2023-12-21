@@ -2,7 +2,7 @@
 
 把iconfont图标批量转换成多个平台小程序的组件。不依赖字体，支持多色彩。
 
-![](https://github.com/LLtaishuai/mini-program-iconfont-cli/blob/master/images/multi-color-icon.jpg?raw=true)
+![](https://github.com/LLtaishuai/@llts/mini-program-iconfont-cli/blob/master/images/multi-color-icon.jpg?raw=true)
 
 # 支持平台：
 - 微信小程序
@@ -63,7 +63,7 @@ npx iconfont-init
 - url 请直接复制[iconfont](http://iconfont.cn)官网提供的项目链接。请务必看清是`.js`后缀而不是`.css`后缀。如果你现在还没有创建iconfont的仓库，那么可以填入这个链接去测试：`http://at.alicdn.com/t/font_1373348_kk9y3jk2omq.js`。
 - trim_icon_prefix 如果你的图标有通用的前缀，而你在使用的时候又不想重复去写，那么可以通过配置这个选项把前缀统一去掉。
 
-![](https://github.com/LLtaishuai/mini-program-iconfont-cli/blob/master/images/symbol-url.png?raw=true)
+![](https://github.com/LLtaishuai/@llts/mini-program-iconfont-cli/blob/master/images/symbol-url.png?raw=true)
 
 #### save_dir
 根据iconfont图标生成的组件存放的位置。每次生成组件之前，该文件夹都会被清空。
@@ -103,7 +103,7 @@ npx iconfont-create --model qq
 
 -------
 
-在生成代码之前，你可以顺便参考[snapshots目录](https://github.com/LLtaishuai/mini-program-iconfont-cli/tree/master/snapshots)自动生成的快照文件。
+在生成代码之前，你可以顺便参考[snapshots目录](https://github.com/LLtaishuai/@llts/mini-program-iconfont-cli/tree/master/snapshots)自动生成的快照文件。
 
 # Step 4
 #### 微信小程序 | QQ小程序
