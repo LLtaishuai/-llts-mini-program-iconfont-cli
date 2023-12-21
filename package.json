@@ -17,8 +17,8 @@
   "author": "LLtaishuai",
   "license": "MIT",
   "files": [
-    "build/src/*",
-    "src/template/*"
+    "build/*",
+    "template/*"
   ],
   "scripts": {
     "release": "release-it"
