@@ -38,7 +38,7 @@ export const generateWechatComponent = (
       names.push(iconIdAfterTrim);
       const iconPrefix = xmlData.prefix || 'common' 
       svgTemplates.push(
-        `<!--${iconIdAfterTrim}-->\n<view wx:if="{{name === '${iconIdAfterTrim}'}}" wx:if="{{prefix === '${iconPrefix}'}}" style="background-image: url({{quot}}data:image/svg+xml, ${generateCase(
+        `<!--${iconIdAfterTrim}-->\n<view wx:if="{{name === '${iconIdAfterTrim}' && prefix === '${iconPrefix}'}}" style="background-image: url({{quot}}data:image/svg+xml, ${generateCase(
           item,
           {
             hexToRgb: true,
