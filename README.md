@@ -49,7 +49,7 @@ npx iconfont-init
   "symbol_options": [
     {
       "url": "请参考README.md，复制 http://iconfont.cn 官网提供的JS链接",
-      "trim_icon_prefix": ""
+      "trim_icon_prefix": "如果name有重复，重复的哪一个将不会去掉前缀，加上前缀后如果还有重复icon就会生成失败，要修改name"
     }
   ],
   "save_dir": "./iconfont",
