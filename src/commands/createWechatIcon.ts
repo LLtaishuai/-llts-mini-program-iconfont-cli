@@ -22,7 +22,7 @@ if (args.model && typeof args.model === 'string') {
 
 const config = getConfig();
 
-Promise.all(config.symbol_options.map(option => fetchXml(option.url, option.trim_icon_prefix))).then((result) => {
+Promise.all(config.symbol_options.map(option => fetchXml(option.url, option.trim_icon_prefix, option.prefix))).then((result) => {
   switch(model) {
     case 'wechat':
       generateWechatComponent(result, config);

@@ -4,6 +4,10 @@ Component({
     name: {
       type: String,
     },
+    prefix: {
+      type: String,
+      value: 'common'
+    }
     // string | string[]
     color: {
       type: null,

@@ -7,6 +7,7 @@ import minimist from 'minimist';
 export interface IOption {
   url: string,
   trim_icon_prefix: string;
+  prefix: string;
 }
 
 export interface Config {

@@ -19,7 +19,7 @@ export interface XmlData {
   }
 }
 
-export const fetchXml = async (url, prefix: string): Promise<{result:XmlData, prefix: string}> => {
+export const fetchXml = async (url, trim_icon_prefix: string, prefix: string): Promise<{result:XmlData, trim_icon_prefix: string, prefix: string}> => {
   console.log('Fetching iconfont data...');
 
   try {
@@ -27,12 +27,12 @@ export const fetchXml = async (url, prefix: string): Promise<{result:XmlData, pr
     const matches = String(data).match(/'<svg>(.+?)<\/svg>'/);
 
     if (matches) {
-      return new Promise<{result:XmlData, prefix: string}>((resolve, reject) => {
+      return new Promise<{result:XmlData, trim_icon_prefix: string, prefix: string}>((resolve, reject) => {
         parseString(`<svg>${matches[1]}</svg>`, { rootName: 'svg' },  (err: Error, result: XmlData) => {
           if (err) {
             reject(err);
           } else {
-            resolve({result, prefix});
+            resolve({result, trim_icon_prefix, prefix});
           }
         });
       });
